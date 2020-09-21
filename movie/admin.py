@@ -35,7 +35,7 @@ class MovieAdmin(admin.ModelAdmin):
     "fields": (("title", "tagline"), )
     }),
     (None, {
-    "fields": ("description", "poster", "get_image")
+    "fields": ("description", ("poster", "get_image"))
     }),
     (None, {
     "fields": (("year", "world_premiere", "country"), )
@@ -53,6 +53,7 @@ class MovieAdmin(admin.ModelAdmin):
 
     def get_image(self, obj):
         return mark_safe(f'<img src={obj.poster.url} width="100" height="110">')
+    get_image.short_description = 'Изображение'
 
 
 @admin.register(Reviews)
