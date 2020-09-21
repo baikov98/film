@@ -16,6 +16,14 @@ class MovieAdmin(admin.ModelAdmin):
     list_filter = ("category", "year")
     search_fields = ('title', 'category__name')
     inlines = [ReviewInline]
+    save_on_top = True
+    save_as = True
+    list_editable = ("draft", )
+    fieldsets = (
+    (None, {
+    "fields": ("title", "tagline")
+    }),
+    )
 
 @admin.register(Reviews)
 class ReviewAdmin(admin.ModelAdmin):
