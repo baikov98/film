@@ -21,7 +21,22 @@ class MovieAdmin(admin.ModelAdmin):
     list_editable = ("draft", )
     fieldsets = (
     (None, {
-    "fields": ("title", "tagline")
+    "fields": (("title", "tagline"), )
+    }),
+    (None, {
+    "fields": (("description", "poster"), )
+    }),
+    (None, {
+    "fields": (("year", "world_premiere", "country"), )
+    }),
+    (None, {
+    "fields": (("actors", "directors", "genres", "category"), )
+    }),
+    (None, {
+    "fields": (("budget", "fees_in_usa", "fees_in_world"), )
+    }),
+    (None, {
+    "fields": (("url", "draft"), )
     }),
     )
 
