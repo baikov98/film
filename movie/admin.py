@@ -51,13 +51,23 @@ class ReviewAdmin(admin.ModelAdmin):
 class GenreAdmin(admin.ModelAdmin):
     list_display = ("name", "url")
 
+@admin.register(Actor)
+class ActorAdmin(admin.ModelAdmin):
+    list_display = ("name", "age")
 
+@admin.register(Rating)
+class ActorAdmin(admin.ModelAdmin):
+    list_display = ("name", "ip")
+
+@admin.register(MovieShots)
+class ActorAdmin(admin.ModelAdmin):
+    list_display = ("title", "movie")
 
 #admin.site.register(Category, CategoryAdmin)
 #admin.site.register(Genre)
 #admin.site.register(Movie)
-admin.site.register(MovieShots)
-admin.site.register(Actor)
-admin.site.register(Rating)
+#admin.site.register(MovieShots)
+#admin.site.register(Actor)
+#admin.site.register(Rating)
 admin.site.register(RatingStar)
 #admin.site.register(Reviews)#
