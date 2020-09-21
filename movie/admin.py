@@ -10,12 +10,16 @@ class ReviewInline(admin.TabularInline):
     extra = 1
     readonly_fields = ("name", "email")
 
+class MovieShotsInline(admin.StackedInline):
+    model = MovieShots
+    extra = 1
+
 @admin.register(Movie)
 class MovieAdmin(admin.ModelAdmin):
     list_display = ("title", "category", "url", "draft")
     list_filter = ("category", "year")
     search_fields = ('title', 'category__name')
-    inlines = [ReviewInline]
+    inlines = [ReviewInline, MovieShotsInline]
     save_on_top = True
     save_as = True
     list_editable = ("draft", )
