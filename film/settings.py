@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'movie'
+    'movie',
+    'ckeditor',
+    "ckeditor_uploader"
 ]
 
 MIDDLEWARE = [
@@ -122,5 +124,6 @@ STATIC_URL = '/static/'
 
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [STATIC_DIR]
+#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
