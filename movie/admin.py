@@ -1,6 +1,17 @@
 from django.contrib import admin
 from .models import Category, Genre, Movie, MovieShots, Actor, Rating, RatingStar, Reviews
 from django.utils.safestring import mark_safe
+
+from ckeditor.widgets import CKEditorWidget
+from post.models import Post
+
+class MovieAdminForm(forms.ModelForm):
+    content = forms.CharField(widget=CKEditorWidget())
+    class Meta:
+        model = Movie
+        fields = '__all__'
+
+
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ("id", "name", "url")
