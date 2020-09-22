@@ -8,7 +8,7 @@ def get_categories():
     return Category.objects.all()
 
 
-@register_inclusion_tag('movie/tags/last_movie.html')
-def get_last_movies():
-    movies = Movie.objects.order_by("id")[:5]
+@register.inclusion_tag('movie/tags/last_movie.html')
+def get_last_movies(count=5):
+    movies = Movie.objects.order_by("id")[:count]
     return {'last_movies': movies}
