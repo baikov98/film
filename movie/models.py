@@ -51,9 +51,6 @@ class Movie(models.Model):
     category = models.ForeignKey(Category, verbose_name='категория', on_delete=models.SET_NULL, null=True)
     draft = models.BooleanField('Черновик', default=False)
     url = models.SlugField(max_length = 150, unique = True)
-
-
-
     def __str__(self):
         return self.title
     def get_absolute_url(self):
