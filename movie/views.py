@@ -2,17 +2,30 @@ from django.shortcuts import render, redirect
 from django.views.generic.base import View
 from django.views.generic import ListView, DetailView
 # Create your views here.
-from .models import Movie, Category
-from .forms import ReviewForm
+from .models import Movie, Category, Actor, Genre
+from .forms import ReviewForm, RatingForm
+from django.db.models import Q
 
-class MoviesView(ListView):
+class GenreYear:
+    def get_genres(self):
+        return Genre.objects.all()
+    def get_year(self):
+        return Movie.objects.filter(draft=False).values('year')
+
+
+class MoviesView(GenreYear, ListView):
     model = Movie
     queryset = Movie.objects.filter(draft=False)
 
 
-class MovieDetailView(DetailView):
+class MovieDetailView(GenreYear, DetailView):
     model = Movie
     slug_field = 'url'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['star_form'] = RatingForm()
+        return context
 
 
 class AddReview(View):
@@ -26,3 +39,17 @@ class AddReview(View):
             form.movie = movie
             form.save()
         return redirect(movie.get_absolute_url())
+
+class ActorView(GenreYear, DetailView):
+    model = Actor
+    template_name = 'movie/actor.html'
+    slug_field = 'name'
+
+
+class FilterMoviesView(GenreYear, ListView):
+    def get_queryset(self):
+        queryset = Movie.objects.filter(
+          Q(year__in=self.request.GET.getlist('year')) |
+          Q(genres__in=self.request.GET.getlist('genre'))
+          )
+        return queryset
